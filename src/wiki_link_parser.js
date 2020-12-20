@@ -3,21 +3,21 @@ function locator(value, fromIndex) {
 }
 
 // https://regex101.com/r/Tsi5wM/1
-const RE_WIKI = /(\[{2}([^\]]+)\]{2})?/gm;
+const RE_WIKI = /\[([^\]]+)\]{2}/gm;
 
 function tokenizer(eat, value, silent) {
     const match = RE_WIKI.exec(value);
     if (match) {
-        if (silent || match.length < 1) {
+        if (silent || match.length < 1 || !match[1]) {
             return true;
         }
-        debugger;
-        if (!match[1]) {
-            return true;
-        }
+        // debugger;
+        // if (!match[1]) {
+        // return true;
+        // }
 
         const result = eat(match[0])({
-            type: "linkReference",
+            type: "wiki_link",
             value: match[1].trim(),
         });
         // debugger;
@@ -26,6 +26,6 @@ function tokenizer(eat, value, silent) {
 }
 
 tokenizer.locator = locator;
-tokenizer.notInLink = true;
+tokenizer.notInLink = false;
 
 export default tokenizer;
