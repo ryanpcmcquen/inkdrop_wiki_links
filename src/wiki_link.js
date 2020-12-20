@@ -10,6 +10,7 @@ export default class WikiLink extends React.Component {
     render() {
         const link = this.props.children[0];
         if (link) {
+            debugger;
             try {
                 return (
                     <a
