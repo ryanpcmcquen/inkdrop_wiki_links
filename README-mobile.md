@@ -1,30 +1,23 @@
-It adds math syntax support to markdown editor and preview.
-It uses [KaTeX](https://katex.org/) to render math typesetting.
+# wiki_links
+
+Add `[[Wiki]]` style links to Inkdrop.
 
 ## Usage
 
-### LaTeX syntax
+### Wiki Links
 
-You can write equations in LaTeX syntax like this:
+You can write Wiki style links to internal notes, like this:
 
-    ```math
-    \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
-    ```
-
-or
-
-    $$
-    \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
-    $$
+    [[Foo]]
 
 It will be rendered as:
 
-![block example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-01.png)
-
-Inline example:
-
-    Inline math: $\int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}$
+<!-- ![block example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-01.png) -->
 
 It will produce:
 
-![inline example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-02.png)
+<!-- ![inline example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-02.png) -->
+
+## Changelog
+
+-   0.1.0 - First release
