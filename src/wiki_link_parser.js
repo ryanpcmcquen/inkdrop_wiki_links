@@ -14,11 +14,10 @@ function tokenizer(eat, value, silent) {
         if (silent) {
             return true;
         }
-        // console.log(db);
-        // debugger;
+        debugger;
 
         return eat(match[0])({
-            type: "text",
+            type: "link",
             value: match[1].trim(),
         });
     }

@@ -7,5 +7,5 @@ export default function (processor) {
     const inlineMethods = Parser.prototype.inlineMethods;
 
     inlineTokenizers.wiki_link = wikiLinkParser;
-    inlineMethods.splice(inlineMethods.indexOf("text"), 0, "wiki_link");
+    inlineMethods.splice(inlineMethods.indexOf("link"), 0, "wiki_link");
 }
