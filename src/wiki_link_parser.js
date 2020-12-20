@@ -14,16 +14,18 @@ function tokenizer(eat, value, silent) {
         if (silent) {
             return true;
         }
-        debugger;
+        // debugger;
 
-        return eat(match[0])({
-            type: "link",
+        const result = eat(match[0])({
+            type: "linkReference",
             value: match[1].trim(),
         });
+        debugger;
+        return result;
     }
 }
 
 tokenizer.locator = locator;
-tokenizer.notInLink = true;
+tokenizer.notInLink = false;
 
 export default tokenizer;
