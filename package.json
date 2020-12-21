@@ -17,7 +17,7 @@
         "inkdrop": "^5.x"
     },
     "dependencies": {
-        "remark-wiki-link": "0.x.x"
+        "unist-util-map": "2.x.x"
     },
     "devDependencies": {
         "@babel/cli": "7.x.x",

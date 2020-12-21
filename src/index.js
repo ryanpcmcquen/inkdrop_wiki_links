@@ -1,12 +1,14 @@
 import { markdownRenderer } from "inkdrop";
 // import wiki_link from "./remark_wiki";
 // import WikiLink from "./wiki_link";
-import wikiLinkPlugin from "remark-wiki-link";
+import wikiLinkPlugin from "./wiki_link_plugin";
+
+// wikiLinkPlugin.hrefTemplate = (permalink) => `command://core:find/${permalink}`;
 
 module.exports = {
     activate() {
-        debugger;
-        console.log(wikiLinkPlugin);
+        // debugger;
+        // console.log(wikiLinkPlugin);
         if (markdownRenderer) {
             // markdownRenderer.remarkPlugins.push(wiki_link);
             markdownRenderer.remarkPlugins.push(wikiLinkPlugin);
