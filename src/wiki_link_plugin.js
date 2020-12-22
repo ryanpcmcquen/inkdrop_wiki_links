@@ -1,3 +1,9 @@
+/**
+ * @author landakram
+ * @copyright 2017 Mark Hudnall
+ * @license MIT
+ * @see https://github.com/landakram/remark-wiki-link
+ */
 // Modified version of:
 // https://github.com/landakram/remark-wiki-link/blob/v0.0.4/src/index.js
 //
@@ -77,7 +83,7 @@ function wikiLinkPlugin(opts = {}) {
                     hProperties: {
                         className: classNames,
                         // href: hrefTemplate(permalink),
-                        onclick: `() =>
+                        onClick: `() =>
                             inkdrop.commands.dispatch(
                                 document.body,
                                 "core:find"

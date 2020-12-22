@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 // export default WikiLink;
 
-export default function createRemarkWikiLink(OrigA) {
+export default function createRemarkWikiLink(OriginalAnchor) {
     return class WikiLink extends React.Component {
         static propTypes = {
             children: PropTypes.arrayOf(PropTypes.string),
@@ -19,32 +19,51 @@ export default function createRemarkWikiLink(OrigA) {
 
             console.log(link);
             console.log(this.props);
-            debugger;
+            // debugger;
             if (link) {
                 try {
-                    return (
-                        <a
-                            onClick={() =>
-                                inkdrop.commands.dispatch(
-                                    document.body,
-                                    "core:search-notes",
-                                    {
-                                        // title: "note:uugSvPq5r",
-                                        title: link,
-                                    }
-                                )
-                            }
-                            renderError={(error) => {
-                                return (
-                                    <span className="ui error message mde-error-message">
-                                        {error.message}
-                                    </span>
-                                );
-                            }}
-                        >
-                            {link}
-                        </a>
-                    );
+                    if (OriginalAnchor) {
+                        return (
+                            <OriginalAnchor
+                                onClick={() =>
+                                    inkdrop.commands.dispatch(
+                                        document.body,
+                                        "core:search-notes",
+                                        {
+                                            // title: "note:uugSvPq5r",
+                                            title: link,
+                                        }
+                                    )
+                                }
+                            >
+                                {link}
+                            </OriginalAnchor>
+                        );
+                    } else {
+                        return (
+                            <a
+                                onClick={() =>
+                                    inkdrop.commands.dispatch(
+                                        document.body,
+                                        "core:search-notes",
+                                        {
+                                            // title: "note:uugSvPq5r",
+                                            title: link,
+                                        }
+                                    )
+                                }
+                                renderError={(error) => {
+                                    return (
+                                        <span className="ui error message mde-error-message">
+                                            {error.message}
+                                        </span>
+                                    );
+                                }}
+                            >
+                                {link}
+                            </a>
+                        );
+                    }
                 } catch (e) {
                     return <span>{e.message}</span>;
                 }

@@ -6,7 +6,7 @@ import wikiLinkPlugin from "./wiki_link_plugin";
 // wikiLinkPlugin.hrefTemplate = (permalink) => `command://core:find/${permalink}`;
 
 module.exports = {
-    origAComponent: null,
+    originalAnchorComponent: null,
     activate() {
         // debugger;
         // console.log(wikiLinkPlugin);
@@ -37,13 +37,13 @@ module.exports = {
         }
     },
     setWikiLinkComponent() {
-        const OrigA = markdownRenderer.remarkReactComponents.a;
-        const WikiLink = createRemarkWikiLink(OrigA);
+        const OriginalAnchor = markdownRenderer.remarkReactComponents.a;
+        const WikiLink = createRemarkWikiLink(OriginalAnchor);
         markdownRenderer.remarkReactComponents.a = WikiLink;
-        this.origAComponent = OrigA;
+        this.originalAnchorComponent = OriginalAnchor;
     },
 
     unsetWikiLinkComponent() {
-        markdownRenderer.remarkReactComponents.a = this.origAComponent;
+        markdownRenderer.remarkReactComponents.a = this.originalAnchorComponent;
     },
 };
