@@ -10,8 +10,6 @@
 // Replaces:
 // "remark-wiki-link": "0.x.x",
 
-import map from "unist-util-map";
-
 const LINK_REGEX = /^\[\[(.+?)\]\]/;
 
 function locator(value, fromIndex) {

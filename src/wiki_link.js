@@ -44,6 +44,8 @@ const createRemarkWikiLink = (OriginalAnchor) => {
                                     { noteId: noteToOpenId }
                                 );
                             });
+
+                            return false;
                         },
                         renderError: (error) => {
                             return (
