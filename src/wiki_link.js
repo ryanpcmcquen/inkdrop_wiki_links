@@ -2,6 +2,8 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
+const db = inkdrop.main.dataStore.getLocalDB();
+
 const createRemarkWikiLink = (OriginalAnchor) => {
     return class WikiLink extends React.Component {
         static propTypes = {
@@ -10,29 +12,40 @@ const createRemarkWikiLink = (OriginalAnchor) => {
 
         render() {
             const link = this.props.children[0];
-
             if (link) {
                 try {
                     const attributes = {
-                        // href: `inkdrop:://note/${link}`,
+                        className: "wiki_link",
+                        onClick: () => {
+                            db.utils.search(`title:${link}`).then((note) => {
+                                if (note?.docs && note.docs.length > 0) {
+                                    inkdrop.commands.dispatch(
+                                        document.body,
+                                        "core:open-note",
+                                        { noteId: note.docs[0]._id }
+                                    );
+                                } else {
+                                    const {
+                                        editingNote,
+                                    } = inkdrop.store.getState();
+                                    debugger;
+                                    db.notes.put({
+                                        ...editingNote,
+                                        _id: db.notes.createId(),
+                                        body: "",
+                                        title: link,
+                                        createdAt: Date.now(),
+                                        updatedAt: Date.now(),
+                                    });
+                                }
+                            });
+                        },
                         renderError: (error) => {
                             return (
                                 <span className="ui error message mde-error-message">
                                     {error.message}
                                 </span>
                             );
-                        },
-                        onClick: () =>
-                            inkdrop.commands.dispatch(
-                                document.body,
-                                "core:search-notes",
-                                {
-                                    keyword: `title:${link}`,
-                                }
-                            ),
-                        style: {
-                            textDecoration: "underline",
-                            cursor: "pointer",
                         },
                     };
                     if (OriginalAnchor) {
