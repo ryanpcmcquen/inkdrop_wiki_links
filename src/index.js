@@ -7,7 +7,7 @@ module.exports = {
     activate() {
         if (markdownRenderer) {
             markdownRenderer.remarkPlugins.push(wikiLinkPlugin);
-            if (!inkdrop.isMobile) {
+            if (!inkdrop || !inkdrop.isMobile) {
                 this.setWikiLinkComponent();
             }
         }
@@ -18,7 +18,7 @@ module.exports = {
             markdownRenderer.remarkPlugins = markdownRenderer.remarkPlugins.filter(
                 (plugin) => plugin !== WikiLink
             );
-            if (!inkdrop.isMobile) {
+            if (!inkdrop || !inkdrop.isMobile) {
                 this.unsetWikiLinkComponent();
             }
         }
