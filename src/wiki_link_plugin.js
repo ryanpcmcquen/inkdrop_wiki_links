@@ -19,67 +19,23 @@ function locator(value, fromIndex) {
 }
 
 function wikiLinkPlugin(opts = {}) {
-    let permalinks = opts.permalinks || [];
-    let defaultPageResolver = (name) => [name.replace(/ /g, "_").toLowerCase()];
-    let pageResolver = opts.pageResolver || defaultPageResolver;
-    let newClassName = opts.newClassName || "new";
     let wikiLinkClassName = opts.wikiLinkClassName || "wiki_link";
-    let defaultHrefTemplate = (permalink) => "command://core:new-note";
-    let hrefTemplate = opts.hrefTemplate || defaultHrefTemplate;
     let aliasDivider = opts.aliasDivider || ":";
-
-    function isAlias(pageTitle) {
-        return pageTitle.indexOf(aliasDivider) !== -1;
-    }
-
-    function parseAliasLink(pageTitle) {
-        var [name, displayName] = pageTitle.split(aliasDivider);
-        return { name, displayName };
-    }
-
-    function parsePageTitle(pageTitle) {
-        if (isAlias(pageTitle)) {
-            return parseAliasLink(pageTitle);
-        }
-        return {
-            name: pageTitle,
-            displayName: pageTitle,
-        };
-    }
 
     function inlineTokenizer(eat, value) {
         let match = LINK_REGEX.exec(value);
 
         if (match) {
-            const pageName = match[1].trim();
-            const { name, displayName } = parsePageTitle(pageName);
-
-            let pagePermalinks = pageResolver(name);
-            let permalink = pagePermalinks.find(
-                (p) => permalinks.indexOf(p) != -1
-            );
-            let exists = permalink != undefined;
-
-            if (!exists) {
-                permalink = pagePermalinks[0];
-            }
-
+            const displayName = match[1].trim();
             let classNames = wikiLinkClassName;
-            if (!exists) {
-                classNames += " " + newClassName;
-            }
 
             return eat(match[0])({
                 type: "wikiLink",
-                value: name,
                 data: {
                     alias: displayName,
-                    permalink: permalink,
-                    exists: exists,
                     hName: "a",
                     hProperties: {
                         className: classNames,
-                        href: hrefTemplate(permalink),
                     },
                     hChildren: [
                         {

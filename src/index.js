@@ -2,20 +2,6 @@ import { markdownRenderer } from "inkdrop";
 import createRemarkWikiLink from "./wiki_link";
 import wikiLinkPlugin from "./wiki_link_plugin";
 
-// inkdrop.commands.add(document.body, {
-//     "wiki_link:open_or_create": (event, ...args) => {
-//         debugger;
-//         console.log(event, args);
-//         console.log("hey!");
-//         inkdrop.commands.dispatch(document.body, "core:search-notes", {
-//             keyword: `title:${event}`,
-//         });
-//         console.log(
-//             inkdrop.commands.dispatch(document.body, "core:open-first-note")
-//         );
-//     },
-// });
-
 module.exports = {
     originalAnchorComponent: null,
     activate() {

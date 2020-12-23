@@ -10,14 +10,6 @@ You can write Wiki style links to internal notes, like this:
 
     [[Foo]]
 
-It will be rendered as:
+If the note does not exist, it will be created.
 
-<!-- ![block example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-01.png) -->
-
-It will produce:
-
-<!-- ![inline example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-02.png) -->
-
-## Changelog
-
--   0.1.0 - First release
+![Demo](assets/inkdrop_wiki_links_demo_2.gif)

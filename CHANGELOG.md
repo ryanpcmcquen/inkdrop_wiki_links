@@ -1,4 +1,4 @@
-## 0.1.0 - First Release
+## 0.1.0 - First Release!
 
--   Every feature added
--   Every bug fixed
+-   Working links.
+-   Links that can not be found by title search, are created.
