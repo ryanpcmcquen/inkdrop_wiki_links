@@ -23,11 +23,8 @@ function wikiLinkPlugin(opts = {}) {
     let defaultPageResolver = (name) => [name.replace(/ /g, "_").toLowerCase()];
     let pageResolver = opts.pageResolver || defaultPageResolver;
     let newClassName = opts.newClassName || "new";
-    // let wikiLinkClassName = opts.wikiLinkClassName || "internal wiki_link";
     let wikiLinkClassName = opts.wikiLinkClassName || "wiki_link";
-    // let defaultHrefTemplate = (permalink) => `#/page/${permalink}`;
-    // let defaultHrefTemplate = (permalink) => `command://core:find/${permalink}`;
-    let defaultHrefTemplate = (permalink) => ``;
+    let defaultHrefTemplate = (permalink) => "command://core:new-note";
     let hrefTemplate = opts.hrefTemplate || defaultHrefTemplate;
     let aliasDivider = opts.aliasDivider || ":";
 
@@ -82,15 +79,7 @@ function wikiLinkPlugin(opts = {}) {
                     hName: "a",
                     hProperties: {
                         className: classNames,
-                        // href: hrefTemplate(permalink),
-                        onClick: `() =>
-                            inkdrop.commands.dispatch(
-                                document.body,
-                                "core:find"
-                                // {
-                                //     title: displayName,
-                                // }
-                            )`,
+                        href: hrefTemplate(permalink),
                     },
                     hChildren: [
                         {
@@ -119,7 +108,6 @@ function wikiLinkPlugin(opts = {}) {
         const visitors = Compiler.prototype.visitors;
         if (visitors) {
             visitors.wikiLink = function (node) {
-                // debugger;
                 if (node.data.alias != node.value) {
                     return `[[${node.value}${aliasDivider}${node.data.alias}]]`;
                 }
