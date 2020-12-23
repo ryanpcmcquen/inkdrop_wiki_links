@@ -2,7 +2,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-const db = inkdrop.main.dataStore.getLocalDB();
+const db = inkdrop?.main?.dataStore?.getLocalDB();
 
 const createRemarkWikiLink = (OriginalAnchor) => {
     return class WikiLink extends React.Component {
@@ -19,32 +19,38 @@ const createRemarkWikiLink = (OriginalAnchor) => {
                         onClick: (event) => {
                             event.preventDefault();
                             event.stopPropagation();
-                            db.utils.search(`title:${link}`).then((note) => {
-                                let noteToOpenId;
-                                if (note?.docs && note.docs.length > 0) {
-                                    noteToOpenId = note.docs[0]._id;
-                                } else {
-                                    const {
-                                        editingNote,
-                                    } = inkdrop.store.getState();
-                                    noteToOpenId = db.notes.createId();
-                                    db.notes.put({
-                                        ...editingNote,
-                                        _id: noteToOpenId,
-                                        _rev: undefined,
-                                        body: "",
-                                        title: link,
-                                        createdAt: Date.now(),
-                                        updatedAt: Date.now(),
+                            if (db) {
+                                db.utils
+                                    .search(`title:${link}`)
+                                    .then((note) => {
+                                        let noteToOpenId;
+                                        if (
+                                            note?.docs &&
+                                            note.docs.length > 0
+                                        ) {
+                                            noteToOpenId = note.docs[0]._id;
+                                        } else {
+                                            const {
+                                                editingNote,
+                                            } = inkdrop.store.getState();
+                                            noteToOpenId = db.notes.createId();
+                                            db.notes.put({
+                                                ...editingNote,
+                                                _id: noteToOpenId,
+                                                _rev: undefined,
+                                                body: "",
+                                                title: link,
+                                                createdAt: Date.now(),
+                                                updatedAt: Date.now(),
+                                            });
+                                        }
+                                        inkdrop.commands.dispatch(
+                                            document.body,
+                                            "core:open-note",
+                                            { noteId: noteToOpenId }
+                                        );
                                     });
-                                }
-                                inkdrop.commands.dispatch(
-                                    document.body,
-                                    "core:open-note",
-                                    { noteId: noteToOpenId }
-                                );
-                            });
-
+                            }
                             return false;
                         },
                         renderError: (error) => {
