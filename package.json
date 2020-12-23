@@ -1,7 +1,7 @@
 {
     "name": "wiki_links",
     "main": "./lib/index",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Bring wiki style links to Inkdrop.",
     "keywords": [],
     "repository": "git@github.com:ryanpcmcquen/inkdrop_wiki_links.git",
