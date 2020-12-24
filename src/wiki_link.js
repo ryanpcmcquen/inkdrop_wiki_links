@@ -16,7 +16,6 @@ const createRemarkWikiLink = (OriginalSpan) => {
             if (link) {
                 try {
                     const attributes = {
-                        className: "wiki_link",
                         // href: `inkdrop://note/${link}`,
                         onClick: (event) => {
                             if (db) {
@@ -63,9 +62,14 @@ const createRemarkWikiLink = (OriginalSpan) => {
                                 </span>
                             );
                         },
+                        ...this.props,
                     };
                     if (OriginalSpan) {
-                        return <OriginalSpan />;
+                        return (
+                            <OriginalSpan {...this.props}>
+                                {this.props.children}
+                            </OriginalSpan>
+                        );
                     } else {
                         return <span {...attributes}>{link}</span>;
                     }
