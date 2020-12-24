@@ -17,16 +17,6 @@ module.exports = {
     activate() {
         if (markdownRenderer) {
             markdownRenderer.remarkPlugins.push(wikiLinkPlugin);
-            // markdownRenderer.remarkReactComponents.wikiLink = WikiLink;
-            // Array.from(document.querySelectorAll(".wiki_link")).forEach(
-            //     (wiki_link_node) => {
-            //         wiki_link_node.addEventListener("click", (event) => {
-            //             console.log(event);
-            //             console.log(event.target.textContent);
-            //         });
-            //     }
-            // );
-            debugger;
             if (!inkdrop.isMobile) {
                 this.setWikiLinkComponent();
             }
@@ -38,9 +28,6 @@ module.exports = {
             markdownRenderer.remarkPlugins = markdownRenderer.remarkPlugins.filter(
                 (plugin) => plugin !== wikiLinkPlugin
             );
-            // if (remarkReactComponents.wikiLink === WikiLink) {
-            // delete remarkReactComponents.wikiLink;
-            // }
             if (!inkdrop.isMobile) {
                 this.unsetWikiLinkComponent();
             }

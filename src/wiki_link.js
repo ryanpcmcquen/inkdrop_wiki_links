@@ -11,22 +11,20 @@ const createRemarkWikiLink = (OriginalSpan) => {
         };
 
         render() {
-            debugger;
             const link = this.props.children[0];
+
             if (link) {
                 try {
                     const attributes = {
                         className: "wiki_link",
                         // href: `inkdrop://note/${link}`,
                         onClick: (event) => {
-                            debugger;
                             if (db) {
                                 event.preventDefault();
                                 event.stopPropagation();
                                 db.utils
                                     .search(`title:${link}`)
                                     .then((note) => {
-                                        debugger;
                                         let noteToOpenId;
                                         if (
                                             note?.docs &&
@@ -69,7 +67,6 @@ const createRemarkWikiLink = (OriginalSpan) => {
                     if (OriginalSpan) {
                         return <OriginalSpan />;
                     } else {
-                        // debugger;
                         return <span {...attributes}>{link}</span>;
                     }
                 } catch (e) {
