@@ -2,9 +2,9 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-const db = inkdrop?.main?.dataStore?.getLocalDB();
+const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
 
-const createRemarkWikiLink = (OriginalAnchor) => {
+const createRemarkWikiLink = (OriginalSpan) => {
     return class WikiLink extends React.Component {
         static propTypes = {
             children: PropTypes.arrayOf(PropTypes.string),
@@ -12,14 +12,15 @@ const createRemarkWikiLink = (OriginalAnchor) => {
 
         render() {
             const link = this.props.children[0];
+
             if (link) {
                 try {
                     const attributes = {
-                        className: "wiki_link",
+                        // href: `inkdrop://note/${link}`,
                         onClick: (event) => {
-                            event.preventDefault();
-                            event.stopPropagation();
                             if (db) {
+                                event.preventDefault();
+                                event.stopPropagation();
                                 db.utils
                                     .search(`title:${link}`)
                                     .then((note) => {
@@ -50,8 +51,9 @@ const createRemarkWikiLink = (OriginalAnchor) => {
                                             { noteId: noteToOpenId }
                                         );
                                     });
+
+                                return false;
                             }
-                            return false;
                         },
                         renderError: (error) => {
                             return (
@@ -60,15 +62,16 @@ const createRemarkWikiLink = (OriginalAnchor) => {
                                 </span>
                             );
                         },
+                        ...this.props,
                     };
-                    if (OriginalAnchor) {
+                    if (OriginalSpan) {
                         return (
-                            <OriginalAnchor {...attributes}>
-                                {link}
-                            </OriginalAnchor>
+                            <OriginalSpan {...this.props}>
+                                {this.props.children}
+                            </OriginalSpan>
                         );
                     } else {
-                        return <a {...attributes}>{link}</a>;
+                        return <span {...attributes}>{link}</span>;
                     }
                 } catch (e) {
                     return <span>{e.message}</span>;

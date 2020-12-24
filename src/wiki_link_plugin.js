@@ -31,7 +31,7 @@ function wikiLinkPlugin(opts = {}) {
                 type: "wikiLink",
                 data: {
                     alias: displayName,
-                    hName: "a",
+                    hName: "span",
                     hProperties: {
                         className: classNames,
                     },
@@ -55,7 +55,7 @@ function wikiLinkPlugin(opts = {}) {
     inlineTokenizers.wikiLink = inlineTokenizer;
     inlineMethods.splice(inlineMethods.indexOf("link"), 0, "wikiLink");
 
-    // Stringify for wiki link
+    // Stringify for wiki link:
     const Compiler = this.Compiler;
 
     if (Compiler != null) {
