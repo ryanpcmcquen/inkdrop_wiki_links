@@ -3,11 +3,31 @@ import createRemarkWikiLink from "./wiki_link";
 import wikiLinkPlugin from "./wiki_link_plugin";
 
 module.exports = {
-    originalAnchorComponent: null,
+    originalSpanComponent: null,
+    setWikiLinkComponent() {
+        const OriginalSpan = markdownRenderer.remarkReactComponents.span;
+        const WikiLink = createRemarkWikiLink(OriginalSpan);
+        markdownRenderer.remarkReactComponents.span = WikiLink;
+        this.originalSpanComponent = OriginalSpan;
+    },
+
+    unsetWikiLinkComponent() {
+        markdownRenderer.remarkReactComponents.span = this.originalSpanComponent;
+    },
     activate() {
         if (markdownRenderer) {
             markdownRenderer.remarkPlugins.push(wikiLinkPlugin);
-            if (!inkdrop || !inkdrop.isMobile) {
+            // markdownRenderer.remarkReactComponents.wikiLink = WikiLink;
+            // Array.from(document.querySelectorAll(".wiki_link")).forEach(
+            //     (wiki_link_node) => {
+            //         wiki_link_node.addEventListener("click", (event) => {
+            //             console.log(event);
+            //             console.log(event.target.textContent);
+            //         });
+            //     }
+            // );
+            debugger;
+            if (!inkdrop.isMobile) {
                 this.setWikiLinkComponent();
             }
         }
@@ -16,21 +36,14 @@ module.exports = {
     deactivate() {
         if (markdownRenderer) {
             markdownRenderer.remarkPlugins = markdownRenderer.remarkPlugins.filter(
-                (plugin) => plugin !== WikiLink
+                (plugin) => plugin !== wikiLinkPlugin
             );
-            if (!inkdrop || !inkdrop.isMobile) {
+            // if (remarkReactComponents.wikiLink === WikiLink) {
+            // delete remarkReactComponents.wikiLink;
+            // }
+            if (!inkdrop.isMobile) {
                 this.unsetWikiLinkComponent();
             }
         }
-    },
-    setWikiLinkComponent() {
-        const OriginalAnchor = markdownRenderer.remarkReactComponents.a;
-        const WikiLink = createRemarkWikiLink(OriginalAnchor);
-        markdownRenderer.remarkReactComponents.a = WikiLink;
-        this.originalAnchorComponent = OriginalAnchor;
-    },
-
-    unsetWikiLinkComponent() {
-        markdownRenderer.remarkReactComponents.a = this.originalAnchorComponent;
     },
 };

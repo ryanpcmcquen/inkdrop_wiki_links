@@ -2,27 +2,31 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-const db = inkdrop?.main?.dataStore?.getLocalDB();
+const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
 
-const createRemarkWikiLink = (OriginalAnchor) => {
+const createRemarkWikiLink = (OriginalSpan) => {
     return class WikiLink extends React.Component {
         static propTypes = {
             children: PropTypes.arrayOf(PropTypes.string),
         };
 
         render() {
+            debugger;
             const link = this.props.children[0];
             if (link) {
                 try {
                     const attributes = {
                         className: "wiki_link",
+                        // href: `inkdrop://note/${link}`,
                         onClick: (event) => {
-                            event.preventDefault();
-                            event.stopPropagation();
+                            debugger;
                             if (db) {
+                                event.preventDefault();
+                                event.stopPropagation();
                                 db.utils
                                     .search(`title:${link}`)
                                     .then((note) => {
+                                        debugger;
                                         let noteToOpenId;
                                         if (
                                             note?.docs &&
@@ -50,8 +54,9 @@ const createRemarkWikiLink = (OriginalAnchor) => {
                                             { noteId: noteToOpenId }
                                         );
                                     });
+
+                                return false;
                             }
-                            return false;
                         },
                         renderError: (error) => {
                             return (
@@ -61,14 +66,11 @@ const createRemarkWikiLink = (OriginalAnchor) => {
                             );
                         },
                     };
-                    if (OriginalAnchor) {
-                        return (
-                            <OriginalAnchor {...attributes}>
-                                {link}
-                            </OriginalAnchor>
-                        );
+                    if (OriginalSpan) {
+                        return <OriginalSpan />;
                     } else {
-                        return <a {...attributes}>{link}</a>;
+                        // debugger;
+                        return <span {...attributes}>{link}</span>;
                     }
                 } catch (e) {
                     return <span>{e.message}</span>;
