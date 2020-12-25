@@ -1,9 +1,7 @@
 "use babel";
 import * as React from "react";
 
-if (!inkdrop.isMobile) {
-    const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
-}
+const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
 
 const createRemarkWikiLink = (OriginalSpan) => {
     const WikiLink = (props) => {

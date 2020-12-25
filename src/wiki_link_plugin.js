@@ -16,7 +16,10 @@ const locator = (value, fromIndex) => {
     return value.indexOf("[", fromIndex);
 };
 
-const wikiLinkPlugin = (opts = {}) => {
+// @WARNING:
+// This cannot be an arrow function
+// because it relies on 'this'.
+const wikiLinkPlugin = function (opts = {}) {
     let wikiLinkClassName = opts.wikiLinkClassName || "wiki_link";
     let aliasDivider = opts.aliasDivider || ":";
 
@@ -28,7 +31,7 @@ const wikiLinkPlugin = (opts = {}) => {
             let classNames = wikiLinkClassName;
 
             return eat(match[0])({
-                type: "wikiLink",
+                type: "wiki_link",
                 data: {
                     alias: displayName,
                     hName: "span",
@@ -52,8 +55,8 @@ const wikiLinkPlugin = (opts = {}) => {
 
     const inlineTokenizers = Parser.prototype.inlineTokenizers;
     const inlineMethods = Parser.prototype.inlineMethods;
-    inlineTokenizers.wikiLink = inlineTokenizer;
-    inlineMethods.splice(inlineMethods.indexOf("link"), 0, "wikiLink");
+    inlineTokenizers.wiki_link = inlineTokenizer;
+    inlineMethods.splice(inlineMethods.indexOf("link"), 0, "wiki_link");
 
     // Stringify for wiki link:
     const Compiler = this.Compiler;
@@ -61,7 +64,7 @@ const wikiLinkPlugin = (opts = {}) => {
     if (Compiler != null) {
         const visitors = Compiler.prototype.visitors;
         if (visitors) {
-            visitors.wikiLink = (node) => {
+            visitors.wiki_link = (node) => {
                 if (node.data.alias != node.value) {
                     return `[[${node.value}${aliasDivider}${node.data.alias}]]`;
                 }
