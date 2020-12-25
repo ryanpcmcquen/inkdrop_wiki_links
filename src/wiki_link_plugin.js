@@ -12,15 +12,15 @@
 
 const LINK_REGEX = /^\[\[(.+?)\]\]/;
 
-function locator(value, fromIndex) {
+const locator = (value, fromIndex) => {
     return value.indexOf("[", fromIndex);
-}
+};
 
-function wikiLinkPlugin(opts = {}) {
+const wikiLinkPlugin = (opts = {}) => {
     let wikiLinkClassName = opts.wikiLinkClassName || "wiki_link";
     let aliasDivider = opts.aliasDivider || ":";
 
-    function inlineTokenizer(eat, value) {
+    const inlineTokenizer = (eat, value) => {
         let match = LINK_REGEX.exec(value);
 
         if (match) {
@@ -44,7 +44,7 @@ function wikiLinkPlugin(opts = {}) {
                 },
             });
         }
-    }
+    };
 
     inlineTokenizer.locator = locator;
 
@@ -61,7 +61,7 @@ function wikiLinkPlugin(opts = {}) {
     if (Compiler != null) {
         const visitors = Compiler.prototype.visitors;
         if (visitors) {
-            visitors.wikiLink = function (node) {
+            visitors.wikiLink = (node) => {
                 if (node.data.alias != node.value) {
                     return `[[${node.value}${aliasDivider}${node.data.alias}]]`;
                 }
@@ -69,6 +69,6 @@ function wikiLinkPlugin(opts = {}) {
             };
         }
     }
-}
+};
 
 module.exports = wikiLinkPlugin;

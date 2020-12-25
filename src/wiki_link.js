@@ -18,6 +18,11 @@ const createRemarkWikiLink = (OriginalSpan) => {
                         event.stopPropagation();
 
                         if (inkdrop.isMobile) {
+                            inkdrop.commands.dispatch(
+                                document.body,
+                                "core:search-notes",
+                                { keyword: `title:${link}` }
+                            );
                         } else if (db) {
                             db.utils.search(`title:${link}`).then((note) => {
                                 let noteToOpenId;
