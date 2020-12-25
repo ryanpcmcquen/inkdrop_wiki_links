@@ -18,7 +18,7 @@ const createRemarkWikiLink = (OriginalSpan) => {
                         event.stopPropagation();
 
                         if (inkdrop.isMobile) {
-                        } else {
+                        } else if (db) {
                             db.utils.search(`title:${link}`).then((note) => {
                                 let noteToOpenId;
                                 if (note?.docs && note.docs.length > 0) {
