@@ -16,3 +16,7 @@
 
 -   This adds preliminary mobile support. Mobile only does a search for the note at this time.
 -   More of the code was standardized for consistentency and readability.
+
+## v0.1.12 - Remove old cruft.
+
+-   Cleared out some old files that didn't need to be there.
