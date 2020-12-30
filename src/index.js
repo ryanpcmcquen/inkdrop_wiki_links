@@ -1,6 +1,9 @@
 import { markdownRenderer } from "inkdrop";
 import createRemarkWikiLink from "./wiki_link";
 import wikiLinkPlugin from "./wiki_link_plugin";
+import { Textcomplete } from "@textcomplete/core";
+import  { CodeMirrorEditor } from "@textcomplete/codemirror";
+import {strategy,option} from "./wiki_completions";
 
 module.exports = {
     originalSpanComponent: null,
@@ -21,6 +24,8 @@ module.exports = {
                 this.setWikiLinkComponent();
             }
         }
+        const editoHandler = this.handleEditorDidLoad(this);
+        global.inkdrop.onEditorLoad(editoHandler.bind(this));
     },
 
     deactivate() {
@@ -33,4 +38,10 @@ module.exports = {
             }
         }
     },
+    handleEditorDidLoad(editor){
+        const {cm} = editor;
+//const cm = CodeMirror(document.getElementById('editor'))
+const cmEditor = new CodeMirrorEditor(cm)
+const textcomplete = new Textcomplete(cmEditor, [strategy], option)
+    }
 };

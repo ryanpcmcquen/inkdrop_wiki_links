@@ -16,7 +16,10 @@
     "engines": {
         "inkdrop": "^5.x"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@textcomplete/codemirror": "^0.1.8",
+        "@textcomplete/core": "^0.1.8"
+    },
     "devDependencies": {
         "@babel/cli": "7.x.x",
         "@babel/core": "7.x.x",
