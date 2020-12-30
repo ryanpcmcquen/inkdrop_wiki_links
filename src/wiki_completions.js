@@ -13,9 +13,15 @@
 
 // This is a sample strategy that autocompletes GitHub-style emoji notation.
 // This document page is using almost the same strategy for demo.
-import {LINK_REGEX} from  './wiki_link_plugin'
+const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
+
 //the actual result of search
-export const gatherCandidates = (term) => ["1", "2", "3", "4", "5"]
+export const gatherCandidates = (term) => db.utils.search(`title:${term}`).then((note) => {
+    if (note?.docs && note.docs.length > 0) {
+        return note.docs.map(d=>d.title);
+    } else
+        return [""];
+});
 export const strategy = {
     // (Optional) Identifier of the strategy. Will be appear on data-strategy
     // attribute of a dropdown element.
@@ -33,7 +39,7 @@ export const strategy = {
     // parameter's first argument.
     // See also "index" parameter.
     match: /\B\[\[(.+?)/,
-         // ///\B:([\-+\w]*)$/,
+    // ///\B:([\-+\w]*)$/,
     // (Optional) Specify the index of target capture group. Default to 1.
     index: 1,
     // (Required) When the current input matches the "match" regexp above, this
@@ -60,7 +66,7 @@ export const strategy = {
     // and the cursor will be set between first and second strings.
     replace: (result /*: ResultType): string*/) => `[[${result[0]}]] `
 }
-export const  option = {
+export const option = {
     // Configure a dropdown UI. 
     dropdown: {
         // Class attribute of the dropdown element.
@@ -68,7 +74,7 @@ export const  option = {
         // The maximum number of items to be rendered.
         maxCount: 10,
         // Placement of the dropdown. "auto", "top" or "bottom".
-      //  placement: "auto",
+        //  placement: "auto",
         // Return header and footer elements' content
         header: (results) => "",
         footer: (results) => "",
@@ -76,7 +82,7 @@ export const  option = {
         // down key when an edge item is active.
         rotate: false,
         // Configure CSS style of the dropdown element.
-       // style: { display: "none", position: "absolute", zIndex: "1000" },
+        // style: { display: "none", position: "absolute", zIndex: "1000" },
         // The parent node of the dropdown element.
         parent: document.body,
 
