@@ -32,7 +32,7 @@ export const strategy = {
     // RegExp. If it matches, the captured substring will be passed to the search
     // parameter's first argument.
     // See also "index" parameter.
-    match: /^\[\[(.+?)/,
+    match: /\B\[\[(.+?)/,
          // ///\B:([\-+\w]*)$/,
     // (Optional) Specify the index of target capture group. Default to 1.
     index: 1,
