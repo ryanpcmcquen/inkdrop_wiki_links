@@ -20,3 +20,7 @@
 ## v0.1.12 - Remove old cruft.
 
 -   Cleared out some old files that didn't need to be there.
+
+## v0.1.14 - Switch to editor mode after new note creation.
+
+-   We also pass less inherited props to the new note, resulting in less data you may not want transferring (such as status or tags).

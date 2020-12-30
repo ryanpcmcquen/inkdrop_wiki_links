@@ -32,7 +32,8 @@ const createRemarkWikiLink = (OriginalSpan) => {
                                     } = inkdrop.store.getState();
                                     noteToOpenId = db.notes.createId();
                                     db.notes.put({
-                                        ...editingNote,
+                                        bookId: editingNote.bookId,
+                                        doctype: editingNote.doctype,
                                         _id: noteToOpenId,
                                         _rev: undefined,
                                         body: "",
@@ -45,6 +46,14 @@ const createRemarkWikiLink = (OriginalSpan) => {
                                     document.body,
                                     "core:open-note",
                                     { noteId: noteToOpenId }
+                                );
+                                inkdrop.commands.dispatch(
+                                    document.body,
+                                    "view:toggle-preview"
+                                );
+                                inkdrop.commands.dispatch(
+                                    document.body,
+                                    "editor:focus"
                                 );
                             });
                         }
