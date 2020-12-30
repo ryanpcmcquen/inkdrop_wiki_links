@@ -58,7 +58,7 @@ export const strategy = {
     // Note that it can return a string or an array of two strings. If it returns
     // an array, the matched substring will be replaced by the concatenated string
     // and the cursor will be set between first and second strings.
-    replace: (result /*: ResultType): string*/) => `:${result[0]}: `
+    replace: (result /*: ResultType): string*/) => `[[${result[0]}]] `
 }
 export const  option = {
     // Configure a dropdown UI. 
