@@ -899,6 +899,39 @@
     readdirp "^2.2.1"
     upath "^1.1.1"
 
+"@textcomplete/codemirror@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@textcomplete/codemirror/-/codemirror-0.1.8.tgz#4b11703f4d1ecccedd5f0ecca97503912b18b60e"
+  integrity sha512-P78WVjPqX3Kz0wNCo49roJTZtgm4luqJbDAyyVgHoJZx5tkHxzC5FP7i0yneF+1V/BTfEJQ6IgSk5PUBU3wvRQ==
+  dependencies:
+    "@types/codemirror" "^0.0.96"
+
+"@textcomplete/core@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@textcomplete/core/-/core-0.1.8.tgz#9eab9ce459bf949e427e19940a6400a0d6c7892c"
+  integrity sha512-T9eTe5HsLZkGkPZ753oyYq3SFEwGLQgGM3HQwFDHjVI9F1cUhh7/Ph1+zaqhUrTVpw/D0aYfUTUKpONpig4DHg==
+  dependencies:
+    eventemitter3 "^4.0.4"
+
+"@types/codemirror@^0.0.96":
+  version "0.0.96"
+  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.96.tgz#73b52e784a246cebef31d544fef45ea764de5bad"
+  integrity sha512-GTswEV26Bl1byRxpD3sKd1rT2AISr0rK9ImlJgEzfvqhcVWeu4xQKFQI6UgSC95NT5swNG4st/oRMeGVZgPj9w==
+  dependencies:
+    "@types/tern" "*"
+
+"@types/estree@*":
+  version "0.0.45"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
+  integrity sha512-jnqIUKDUqJbDIUxm0Uj7bnlMnRm1T/eZ9N+AVMqhPgzrba2GhGG5o/jCTwmdPK709nEZsGoMzXEDUjcXHa3W0g==
+
+"@types/tern@*":
+  version "0.23.3"
+  resolved "https://registry.yarnpkg.com/@types/tern/-/tern-0.23.3.tgz#4b54538f04a88c9ff79de1f6f94f575a7f339460"
+  integrity sha512-imDtS4TAoTcXk0g7u4kkWqedB3E4qpjXzCpD2LU5M5NAXHzCDsypyvXSaG7mM8DKYkCRa7tFp4tS/lp/Wo7Q3w==
+  dependencies:
+    "@types/estree" "*"
+
 ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
@@ -1228,6 +1261,11 @@ esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
+
+eventemitter3@^4.0.4:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
+  integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
 
 expand-brackets@^2.1.4:
   version "2.1.4"
