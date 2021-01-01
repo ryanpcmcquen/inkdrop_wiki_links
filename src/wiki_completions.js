@@ -1,14 +1,12 @@
-
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-// How to construct the editor object depends on the actual editor class. 
-// Please read the document of the editor you choose. 
+// How to construct the editor object depends on the actual editor class.
+// Please read the document of the editor you choose.
 
-
-// When you finish using it. 
-// This command also destroys the editor object. 
+// When you finish using it.
+// This command also destroys the editor object.
 //textcomplete.destroy()
 
 // This is a sample strategy that autocompletes GitHub-style emoji notation.
@@ -16,12 +14,12 @@
 const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
 
 //the actual result of search
-export const gatherCandidates = (term) => db.utils.search(`title:${term}`).then((note) => {
-    if (note?.docs && note.docs.length > 0) {
-        return note.docs.map(d=>d.title);
-    } else
-        return [""];
-});
+export const gatherCandidates = (term) =>
+    db.utils.search(`title:${term}`).then((note) => {
+        if (note?.docs && note.docs.length > 0) {
+            return note.docs.map((d) => d.title);
+        } else return [""];
+    });
 export const strategy = {
     // (Optional) Identifier of the strategy. Will be appear on data-strategy
     // attribute of a dropdown element.
@@ -50,7 +48,7 @@ export const strategy = {
         callback,
         match //: RegExpMatchArray
     ) => {
-        callback(await gatherCandidates(term))
+        callback(await gatherCandidates(term));
     },
     // (Optional) Whether the search results are cached. Default false.
     cache: false,
@@ -64,10 +62,10 @@ export const strategy = {
     // Note that it can return a string or an array of two strings. If it returns
     // an array, the matched substring will be replaced by the concatenated string
     // and the cursor will be set between first and second strings.
-    replace: (result /*: ResultType): string*/) => `[[${result[0]}]] `
-}
+    replace: (result /*: ResultType): string*/) => `[[${result[0]}]] `,
+};
 export const option = {
-    // Configure a dropdown UI. 
+    // Configure a dropdown UI.
     dropdown: {
         // Class attribute of the dropdown element.
         className: "dropdown-menu textcomplete-dropdown",
@@ -91,6 +89,6 @@ export const option = {
             className: "textcomplete-item",
             // Active item's class attribute.
             activeClassName: "textcomplete-item active",
-        }
-    }
-}
+        },
+    },
+};
