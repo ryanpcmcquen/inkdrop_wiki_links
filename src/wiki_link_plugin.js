@@ -10,7 +10,7 @@
 // Replaces:
 // "remark-wiki-link": "0.x.x",
 
-export const LINK_REGEX = /^\[\[(.+?)\]\]/;
+export const LINK_REGEX = /^\[{2}([^\]]+)\]{2}/;
 
 const locator = (value, fromIndex) => {
     return value.indexOf("[", fromIndex);

@@ -14,12 +14,16 @@
 const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
 
 //the actual result of search
-export const gatherCandidates = (term) =>
-    db.utils.search(`title:${term}`).then((note) => {
-        if (note?.docs && note.docs.length > 0) {
-            return note.docs.map((d) => d.title);
-        } else return [""];
-    });
+export const gatherCandidates = async (term) => {
+    console.log(term);
+    const note = await db.utils.search(`title:${term}`);
+
+    if (note?.docs && note.docs.length > 0) {
+        return note.docs.map((doc) => doc.title);
+    } else {
+        return [""];
+    }
+};
 export const strategy = {
     // (Optional) Identifier of the strategy. Will be appear on data-strategy
     // attribute of a dropdown element.
@@ -27,16 +31,36 @@ export const strategy = {
     // (Optional) This function is called on every change before matching. The
     // first argument is the string from head to cursor. If it returns `false`,
     // following matching phase isn't started.
-    context: (beforeCursor) =>
+    context: (beforeCursor) => {
         // Return false if the cursor is in code block or inline code notation
         // to stop executing the matching phase.
-        true,
+        // console.log(beforeCursor.slice(-2));
+        // console.log(beforeCursor.slice(-2) === "[[");
+        // debugger;
+
+        if (beforeCursor.indexOf("[") > -1) {
+            const reversedCursor = beforeCursor.split("").reverse();
+
+            if (
+                reversedCursor.indexOf("[") < reversedCursor.indexOf("]") ||
+                reversedCursor.indexOf("]") < 0
+            ) {
+                console.log("true");
+                return true;
+            }
+        }
+
+        console.log("false");
+        return false;
+    },
     // !isInClode(beforeCursor),
     // (Required) On every change, the string from head to cursor tests with the
     // RegExp. If it matches, the captured substring will be passed to the search
     // parameter's first argument.
     // See also "index" parameter.
-    match: /\B\[\[(.+?)/,
+    // match: /\B\[\[(.+?)/,
+    // match: /\B\[\[([^\]]+)/gm,
+    match: /\[\[([^\]]+)/gm,
     // ///\B:([\-+\w]*)$/,
     // (Optional) Specify the index of target capture group. Default to 1.
     index: 1,
@@ -48,6 +72,7 @@ export const strategy = {
         callback,
         match //: RegExpMatchArray
     ) => {
+        // debugger;
         callback(await gatherCandidates(term));
     },
     // (Optional) Whether the search results are cached. Default false.
@@ -62,7 +87,7 @@ export const strategy = {
     // Note that it can return a string or an array of two strings. If it returns
     // an array, the matched substring will be replaced by the concatenated string
     // and the cursor will be set between first and second strings.
-    replace: (result /*: ResultType): string*/) => `[[${result[0]}]] `,
+    replace: (result /*: ResultType): string*/) => `[[${result}]] `,
 };
 export const option = {
     // Configure a dropdown UI.
