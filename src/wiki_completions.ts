@@ -70,7 +70,7 @@ export const strategy = {
     // See also "index" parameter.
     // match: /\B\[\[(.+?)/,
     // match: /\B\[\[([^\]]+)/gm,
-    match: /\[\[([\w]+)/m,
+    match: /\[\[([^\]]+)(?=$)/,
     // ///\B:([\-+\w]*)$/,
     // (Optional) Specify the index of target capture group. Default to 1.
     index: 1,
@@ -106,7 +106,7 @@ export const strategy = {
     // and the cursor will be set between first and second strings.
     replace: (result /*: ResultType): string*/)  =>{
       console.log(result)
-     result} //["[[" + `${result}` + "]]",""],}
+     return `[[${result}]]`} //["[[" + `${result}` + "]]",""],}
 };
 export const option = {
     // Configure a dropdown UI.
