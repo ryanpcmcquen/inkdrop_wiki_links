@@ -24,8 +24,10 @@ const createRemarkWikiLink = (OriginalSpan) => {
                         } else if (db) {
                             db.utils.search(`title:${link}`).then((note) => {
                                 let noteToOpenId;
+                                let isNewNote;
                                 if (note?.docs && note.docs.length > 0) {
                                     noteToOpenId = note.docs[0]._id;
+                                    isNewNote = false;
                                 } else {
                                     const {
                                         editingNote,
@@ -41,16 +43,19 @@ const createRemarkWikiLink = (OriginalSpan) => {
                                         createdAt: Date.now(),
                                         updatedAt: Date.now(),
                                     });
+                                    isNewNote = true;
                                 }
                                 inkdrop.commands.dispatch(
                                     document.body,
                                     "core:open-note",
                                     { noteId: noteToOpenId }
                                 );
-                                inkdrop.commands.dispatch(
-                                    document.body,
-                                    "view:toggle-preview"
-                                );
+                                if (isNewNote) {
+                                    inkdrop.commands.dispatch(
+                                        document.body,
+                                        "view:toggle-preview"
+                                    );
+                                }
                                 inkdrop.commands.dispatch(
                                     document.body,
                                     "editor:focus"

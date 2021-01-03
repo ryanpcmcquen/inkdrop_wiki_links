@@ -21,9 +21,9 @@ const db = inkdrop && inkdrop?.main?.dataStore?.getLocalDB();
 //@ts-ignore
 const cursor = inkdrop && inkdrop?.codeMirror?.getCursor();
 //experimental
-const cmParentElement = document.querySelector(
-    "#app-container > div.main-layout.main-layout-slim > div.editor-layout > div.mde-layout > div > div.mde > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code"
-);
+// const cmParentElement = document.querySelector(
+//     "#app-container > div.main-layout.main-layout-slim > div.editor-layout > div.mde-layout > div > div.mde > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code"
+// );
 
 export const gatherCandidates = async (term) => {
     const note = await db.utils.search(`title:${term}`);
@@ -34,14 +34,14 @@ export const gatherCandidates = async (term) => {
         return [""];
     }
 };
-export const strategy = {
+export const strategy: object = {
     // (Optional) Identifier of the strategy. Will be appear on data-strategy
     // attribute of a dropdown element.
     id: "mention",
     // (Optional) This function is called on every change before matching. The
     // first argument is the string from head to cursor. If it returns `false`,
     // following matching phase isn't started.
-    context: (beforeCursor: string) => {
+    context: (beforeCursor: string): boolean => {
         // Return false if the cursor is in code block or inline code notation
         // to stop executing the matching phase.
         /*
@@ -77,7 +77,7 @@ export const strategy = {
         term: string,
         callback: (results: SearchResult<string>[]) => void,
         match: RegExpMatchArray
-    ) => {
+    ): Promise<void> => {
         callback(await gatherCandidates(term));
     },
     // (Optional) Whether the search results are cached. Default false.
@@ -92,7 +92,7 @@ export const strategy = {
     // Note that it can return a string or an array of two strings. If it returns
     // an array, the matched substring will be replaced by the concatenated string
     // and the cursor will be set between first and second strings.
-    replace: (result /*: ResultType): string*/) => {
+    replace: (result: string): string => {
         return `[[${result}]]`;
     },
 };

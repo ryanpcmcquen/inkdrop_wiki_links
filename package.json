@@ -1,7 +1,7 @@
 {
     "name": "wiki_links",
     "main": "./lib/index",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Bring wiki style links to Inkdrop.",
     "keywords": [],
     "repository": "https://github.com/ryanpcmcquen/inkdrop_wiki_links.git",
@@ -10,7 +10,8 @@
         "wiki_link.less"
     ],
     "scripts": {
-        "build": "babel src/ -s --extensions .js,.jsx,.ts,.tsx -d lib/",
+        "tc": "tsc --project tsconfig.json",
+        "build": "yarn tc && babel src/ -s --extensions .js,.jsx,.ts,.tsx -d lib/",
         "dev": "babel src/ -s --extensions .js,.jsx,.ts,.tsx -d lib/ --watch"
     },
     "engines": {

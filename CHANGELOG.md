@@ -28,3 +28,8 @@
 ## v0.2.1 - Autocomplete!
 
 -   Many thanks to @ebigram for bringing autocomplete to this plugin. Huzzah!
+
+## v0.2.3 - Cleanup and slight change in new note behavior.
+
+-   Cleaned up some code and made the build process nicer for the TypeScript that is here.
+-   There is new behavior now in regards to notes that are created when they don't exist. New notes focus and switch to editor mode, existing notes remain in preview mode.

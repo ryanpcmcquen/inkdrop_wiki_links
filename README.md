@@ -18,7 +18,7 @@ You can write Wiki style links to internal notes, like this:
 
 If the note does not exist, it will be created.
 
-![Demo](assets/inkdrop_wiki_links_demo_2.gif)
+![Demo](assets/inkdrop_wiki_links_demo_3.gif)
 
 Now with autocomplete!
 
