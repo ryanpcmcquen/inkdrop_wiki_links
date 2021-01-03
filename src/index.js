@@ -46,7 +46,7 @@ module.exports = {
         //const cm = CodeMirror(document.getElementById('editor'))
 
         //cm.on(document.body,"beforeChange", (e)=>{e.preventDefault(); e.stopPropagation(); CodeMirror.Pass});
-        const cmEditor = new CodeMirrorEditor(codeMirror);
+        const cmEditor = new CodeMirrorEditor(cm);
         const textcomplete = new Textcomplete(cmEditor, [strategy], option);
     },
 };
