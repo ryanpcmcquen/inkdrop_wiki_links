@@ -24,3 +24,7 @@
 ## v0.1.14 - Switch to editor mode after new note creation.
 
 -   We also pass less inherited props to the new note, resulting in less data you may not want transferring (such as status or tags).
+
+## v0.2.1 - Autocomplete!
+
+-   Many thanks to @ebigram for bringing autocomplete to this plugin. Huzzah!
