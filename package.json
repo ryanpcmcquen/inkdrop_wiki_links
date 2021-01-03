@@ -11,7 +11,6 @@
     ],
     "scripts": {
         "build": "babel src/ -s --extensions .js,.jsx,.ts,.tsx -d lib/",
-        "build-broken": "babel src/ -s --extensions '.js,.jsx,.ts,.tsx' -d lib/",
         "dev": "babel src/ -s --extensions .js,.jsx,.ts,.tsx -d lib/ --watch"
     },
     "engines": {
