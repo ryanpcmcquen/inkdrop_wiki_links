@@ -22,4 +22,4 @@ If the note does not exist, it will be created.
 
 Now with autocomplete!
 
-![Autocomplete demo](assets/inkdrop_wiki_links_autcomplete_demo.gif)
+![Autocomplete demo](assets/inkdrop_wiki_links_autocomplete_demo.gif)
