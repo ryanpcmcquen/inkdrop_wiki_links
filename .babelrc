@@ -1,12 +1,41 @@
 {
     "presets": [
+        "@babel/preset-typescript",
+        "@babel/preset-react",
         [
             "@babel/preset-env",
             {
-                "targets": { "electron": "7.3.2" }
+                "targets": {
+                    "electron": "7.3.2",
+                    "node": 12
+                }
             }
         ],
-        "@babel/preset-react"
+
+
+
     ],
-    "plugins": ["@babel/plugin-proposal-class-properties"]
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": "./src",
+                "alias": {
+                    "@root": [
+                        "./"
+                    ],
+                    "@src": [
+                        "./src"
+                    ]
+                },
+                "extensions": [
+                    ".js",
+                    ".ts"
+                ]
+            }
+        ],
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread"
+    ],
+    "sourceMaps": true
 }
